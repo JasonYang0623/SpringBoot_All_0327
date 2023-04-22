@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .card {
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        .card-header {
+            background-color: #45a049;
+            color: #fff;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #3e8e41;
+            border-color: #4CAF50;
+        }
+        .btn-primary:hover {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+        .form-control:focus {
+            border-color: #4CAF50;
+            box-shadow: none;
+        }
+        .nav-link{
+            color: #4CAF50;
+        }
+        .nav-link:hover{
+            color: #3e8e41;
+            border-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>图书管理系统</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#login" data-toggle="tab" onclick="turnLogin()">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#register" data-toggle="tab" onclick="turnRegister()">注册</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="login">
+                            <form th:action="@{/users/login}" method="post">
+                                <div class="form-group">
+                                    <label for="username">用户名</label>
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">密码</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">登录</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="register">
+                            <form th:action="@{/users/register}" method="post">
+                                <div class="form-group">
+                                    <label for="reg-username">用户名</label>
+                                    <input type="text" class="form-control" name="username" id="reg-username" placeholder="请输入用户名" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-password">密码</label>
+                                    <input type="password" class="form-control" name="password" id="reg-password" placeholder="请输入密码" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm-password">确认密码</label>
+                                    <input type="password" class="form-control" name="password1" id="confirm-password" placeholder="请再次输入密码" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block" onclick="checkPassword()">注册</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function turnRegister(e) {
+        document.getElementsByClassName("nav-link active")[0].className="nav-link"
+        document.getElementsByClassName("nav-link")[1].className="nav-link active"
+        document.getElementById("login").className = "tab-pane"
+        document.getElementById("register").className = "tab-pane active"
+    }
+    function turnLogin(e) {
+        document.getElementsByClassName("nav-link active")[0].className="nav-link"
+        document.getElementsByClassName("nav-link")[0].className="nav-link active"
+        document.getElementById("register").className = "tab-pane"
+        document.getElementById("login").className = "tab-pane active"
+    }
+    function checkPassword() {
+        var password = document.getElementById("reg-password").value;
+        var confirmPassword = document.getElementById("confirm-password").value;
+        if (password !== confirmPassword) {
+            // document.getElementById(register).getElementsByTagName("button")
+            alert("两次输入的密码不一致，请重新输入！");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+spring:
+  thymeleaf:
+    cache: true
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+  profiles:
+    active: dev
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/java
+  rabbitmq:
+    host: localhost
+    password: guest
+    port: 5672
+    username: guest
+    virtual-host: /
+
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.jason.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  file:
+    name: SpringBoot_All.log
+    path: D:\IDEA\workspace\SpringBoot_All_0327
+  level:
+#    root: info
+     com.jason.controller: info
+#设置com.jason.controller包下的日志级别为info级别，
+#即在com.jason.controller包下记录的日志只有info级别及以上的日志会被记录下来。
+#同时，如果将root级别的日志级别也设为info级别，那么所有的日志级别低于info级别的日志都会被忽略。
+  logback:
+    rollingpolicy: #日志滚动保存
+      max-file-size: 10MB
+      file-name-pattern: SpringBoot_All.%d{yyyy-MM-dd}.%i.log
+

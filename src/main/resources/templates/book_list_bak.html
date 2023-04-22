@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>图书管理列表页</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: center;
+      padding: 8px;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    h1 {
+      color: #4CAF50;
+      font-size: 36px;
+      text-align: center;
+      margin-top: 50px;
+    }
+    form {
+      text-align: center;
+      margin-top: 30px;
+    }
+    input[type=text] {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #4CAF50;
+      border-radius: 4px;
+    }
+    button[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button[type=submit]:hover {
+      background-color: #45a049;
+    }
+    a {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    a:hover {
+      background-color: #45a049;
+    }
+    .pagination {
+      display: inline-block;
+    }
+
+    .pagination li {
+      display: inline;
+      margin: 0 5px;
+    }
+
+    .pagination li a {
+      color: #fff;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    .pagination li.active a {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .pagination li a:hover:not(.active) {
+      color: #4CAF50;
+      background-color: #ddd;
+    }
+    .container{
+      margin: 0 200px;
+    }
+  </style>
+</head>
+<body>
+<h1>图书管理列表页</h1>
+<form action="/books/search" method="get">
+  <input type="text" name="keyword" placeholder="请输入关键字">
+  <button type="submit">搜索</button>
+</form>
+
+<div class="container">
+  <a href="/books/add">添加图书</a>
+<table>
+  <thead>
+  <tr>
+    <th>书名</th>
+    <th>作者</th>
+    <th>出版社</th>
+    <th>出版日期</th>
+    <th>价格</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td th:text="${book.name}">书籍1</td>
+    <td th:text="${book.author}">作者1</td>
+    <td th:text="${book.publisher}">出版社1</td>
+    <td th:text="${book.publishDate}">2022-10-01</td>
+    <td th:text="${book.price}">10.00</td>
+    <td>
+      <a th:href="@{/books/edit/{id}(id=${book.id})}">编辑</a>
+      <a th:href="@{/books/delete/{id}(id=${book.id})}">删除</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<div style="text-align:center;">
+  <ul class="pagination">
+    <li><a href="#">«</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">»</a></li>
+  </ul>
+</div>
+</body>
+</html>

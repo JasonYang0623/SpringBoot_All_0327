@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>编辑书籍</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      color: #4CAF50;
+      text-align: center;
+      margin-top: 50px;
+    }
+    form {
+      margin: 50px auto;
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px #ccc;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #45a049;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    input[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+    input[type="button"] {
+      background-color: #4CAF50;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+<h1>编辑书籍</h1>
+<form th:action="@{/books/edit}" method="post">
+  <input type="text" name="id" th:value="${book.id}" hidden>
+  <label for="title">书名</label>
+  <input type="text" id="title" name="name" required th:value="${book.name}">
+
+  <label for="author">作者</label>
+  <input type="text" id="author" name="author" required th:value="${book.author}">
+
+  <label for="publisher">出版社：</label>
+  <input type="text" id="publisher" name="publisher" th:value="${book.publisher}">
+  <label for="year">出版日期：</label>
+  <input type="date" id="year" name="publishDate" th:value="${#dates.format(book.publishDate,'yyyy-MM-dd')}">
+
+  <label for="price">价格：</label>
+  <input type="text" id="price" name="price" th:value="${book.price}">
+
+  <input type="submit" value="保存">
+  <input type="button" th:onclick="|window.location.href='@{/books/list}'|" value="返回">
+</form>
+</body>
+</html>

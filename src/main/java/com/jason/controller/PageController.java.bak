@@ -1,0 +1,25 @@
+package com.jason.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * @author Jason
+ * @date 2023/3/28 9:39
+ * @content
+ */
+@Controller
+@RequestMapping("")
+public class PageController {
+    @GetMapping(value = {"/","/index"})
+    public String index(){
+        return "login";
+    }
+    @GetMapping("/books/add")
+    public String toAddBooks(){
+        return "add";
+    }
+}

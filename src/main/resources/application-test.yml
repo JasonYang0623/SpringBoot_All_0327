@@ -1,0 +1,11 @@
+#测试环境
+server:
+  port: 8082
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/springboot_web_0327?serverTimezone=UTC
+      username: root
+      password: 123456
